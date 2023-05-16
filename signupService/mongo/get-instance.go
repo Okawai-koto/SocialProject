@@ -17,7 +17,7 @@ var (
 )
 
 // Use for the get mongo db client instance
-func GetMongoDBGetInstance() *mongo.Client {
+func getMongoDBGetInstance() *mongo.Client {
 	once.Do(func() {
 		// Use the SetServerAPIOptions() method to set the Stable API version to 1
 		serverAPI := options.ServerAPI(options.ServerAPIVersion1)
