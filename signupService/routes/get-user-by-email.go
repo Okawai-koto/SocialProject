@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
 	"signupservice/mongo"
 
@@ -10,15 +11,15 @@ import (
 // getAlbumByID locates the album whose ID value matches the id
 // parameter sent by the client, then returns that album as a response.
 func GetUserByEmail(c *gin.Context) {
-	email := c.Param("email")
-	users := mongo.GetUsersFromMongo()
-	// Loop over the list of albums, looking for
-	// an album whose ID value matches the parameter.
-	for _, a := range users {
-		if a.Email == email {
-			c.IndentedJSON(http.StatusOK, a)
-			return
-		}
+	userEmail := c.Param("email")
+	result := mongo.GetUserFromMongo(userEmail)
+	fmt.Println(result)
+
+	if result.Email == "" {
+		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "email not found"})
+		return
 	}
-	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "email not found"})
+
+	c.IndentedJSON(http.StatusOK, result)
+
 }
