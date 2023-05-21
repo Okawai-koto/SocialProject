@@ -2,7 +2,7 @@ package mongo
 
 import (
 	"context"
-	"signupservice/models"
+	"signupservice/src/models"
 )
 
 // Use for the add user to mongo db database.

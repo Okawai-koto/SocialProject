@@ -3,7 +3,7 @@ package mongo
 import (
 	"context"
 	"log"
-	"signupservice/models"
+	"signupservice/src/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 )

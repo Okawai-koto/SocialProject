@@ -2,7 +2,7 @@ package mongo
 
 import (
 	"context"
-	"signupservice/models"
+	"signupservice/src/models"
 
 	"go.mongodb.org/mongo-driver/bson"
 )

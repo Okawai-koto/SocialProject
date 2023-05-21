@@ -2,8 +2,8 @@ package routes
 
 import (
 	"net/http"
-	"signupservice/models"
-	"signupservice/mongo"
+	"signupservice/src/models"
+	"signupservice/src/mongo"
 
 	"github.com/gin-gonic/gin"
 )
