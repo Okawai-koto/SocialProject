@@ -1,14 +1,13 @@
 package main
 
 import (
-	"signupservice/aws"
 	"signupservice/src/routes"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	aws.SendEmail()
+	// aws.SendEmail()
 	router := gin.Default()
 
 	router.GET("/users/:email", routes.GetUserByEmail)
@@ -17,6 +16,6 @@ func main() {
 	router.PATCH("/users/:email", routes.UpdateUserEmail)
 	router.DELETE("/users/:email", routes.DeleteUserByEmail)
 
-	router.Run("localhost:8080")
+	router.Run(":8080")
 
 }

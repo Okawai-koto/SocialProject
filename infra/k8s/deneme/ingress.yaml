@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: test.dev
+      http:
+        paths:
+          - path: /api/tickets
+            pathType: Prefix
+            backend:
+              service:
+                name: ticket-srv
+                port:
+                  number: 3000
+          - path: /api/orders
+            pathType: Prefix
+            backend:
+              service:
+                name: order-srv
+                port:
+                  number: 3000

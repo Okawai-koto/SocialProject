@@ -1,0 +1,35 @@
+# İlk aşama: Bağımlılıkları derle
+FROM golang:1.20-buster AS builder
+
+WORKDIR /app
+
+# go.mod ve go.sum dosyalarını kopyala
+COPY go.mod .
+COPY go.sum .
+
+# Bağımlılıkları yükle
+RUN go mod download
+
+# Uygulama kaynak kodunu kopyala
+COPY . .
+
+# Uygulamayı derle
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  -o app .
+
+
+# İkinci aşama: Hafif bir çalıştırma ortamı oluştur
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /root/
+
+# İlk aşamadaki derlenmiş uygulamayı kopyala
+COPY --from=builder /app/app .
+
+# API'nin belirttiği portu expose et
+EXPOSE 8080
+
+# Uygulamayı çalıştır
+CMD ["./app"]
+
