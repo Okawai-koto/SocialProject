@@ -16,7 +16,7 @@ func SendEmail() {
 	// AWS kimlik bilgileri ve bölgesi
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String("us-east-1"),
-		Credentials: credentials.NewStaticCredentials("AKIAT3D7JBZQHIYEI4PY", "IxMgHneUP1aKPiiNkuiO6QZ6+YrGTi7gocxwg9Qa", ""),
+		Credentials: credentials.NewStaticCredentials("AKIADSAKJKLDA", "DSAKDŞSAKDSA", ""),
 	})
 	if err != nil {
 		log.Fatal(err)
