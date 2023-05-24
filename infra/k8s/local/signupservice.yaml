@@ -1,5 +1,5 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: mongo-server
   labels:
@@ -21,10 +21,13 @@ spec:
     spec:
       containers:
       - name: mongo-server
-        image: okawai/signupservice:0.0.0.7.5
-        imagePullPolicy: Always
+        image: okawai/signupservice:0.0.8.1
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
+        envFrom:
+            - secretRef:
+                name: socialsecret
 
 ---
 

@@ -1,6 +1,7 @@
 package main
 
 import (
+	
 	"signupservice/src/routes"
 
 	"github.com/gin-gonic/gin"
@@ -9,7 +10,7 @@ import (
 func main() {
 	// aws.SendEmail()
 	router := gin.Default()
-
+	
 	router.GET("/users/:email", routes.GetUserByEmail)
 	router.GET("/users", routes.GetUsers)
 	router.POST("/users", routes.PostUsers)

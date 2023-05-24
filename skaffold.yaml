@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/local/*
+build:
+  local:
+    push: false
+  artifacts:
+    - image: okawai/signupservice
+      context: signUpService
+      docker:
+        dockerfile: dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.go'
+            dest: .
