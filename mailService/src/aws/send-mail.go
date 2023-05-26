@@ -12,11 +12,16 @@ import (
 	"github.com/aws/aws-sdk-go/service/ses"
 )
 
-func SendEmail() {
+const (
+	sender = "descless26@gmail.com"
+	//toWho  = "emos004@gmail.com"
+)
+
+func SendEmail(toWho string, verify string) {
 	// AWS kimlik bilgileri ve bölgesi
 	sess, err := session.NewSession(&aws.Config{
-		Region:      aws.String("us-east-1"),
-		Credentials: credentials.NewStaticCredentials("AKIADSAKJKLDA", "DSAKDŞSAKDSA", ""),
+		Region:      aws.String("eu-north-1"),
+		Credentials: credentials.NewStaticCredentials("AKIAXBICWBZOLK7BWBDT", "4a3T/TLnomfR5WDd1BFsdd7xwz1U4ET2SxA5HORZ", ""),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -32,12 +37,13 @@ func SendEmail() {
 			<h1>Bu bir test e-postasıdır.</h1>
 			<h1>Okawaii KOTTO!!</h1>
 			<p>Merhaba, bu e-posta bir test e-postasıdır.</p>
+			<br>
 		</body>
 	</html>
-	`
+	` + verify
 
 	// Ek dosyası
-	filePath := "C:/Users/FIRAT/Desktop/social/signupService/aws/attachment.pdf"
+	filePath := "C:/Users/deneme/Documents/GitHub/SocialProject/mailService/src/aws/attachment.pdf"
 	attachmentData, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
@@ -47,8 +53,8 @@ func SendEmail() {
 	attachmentContent := base64.StdEncoding.EncodeToString(attachmentData)
 
 	// Raw e-posta mesajı
-	rawMessage := fmt.Sprintf("From: sairmisinnesin@gmail.com\r\n" +
-		"To: itsbap22@gmail.com\r\n" +
+	rawMessage := fmt.Sprintf("From: " + sender + "\r\n" +
+		"To: " + toWho + "\r\n" +
 		"Subject: Test Email with Attachment\r\n" +
 		"MIME-Version: 1.0\r\n" +
 		"Content-Type: multipart/mixed; boundary=boundary\r\n" +
