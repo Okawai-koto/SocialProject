@@ -16,6 +16,6 @@ func main() {
 	// router.PATCH("/users/:email", routes.UpdateUserEmail)
 	// router.DELETE("/users/:email", routes.DeleteUserByEmail)
 
-	router.Run(":8080")
+	router.Run(":8081")
 
 }

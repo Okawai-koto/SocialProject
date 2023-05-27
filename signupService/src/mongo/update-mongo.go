@@ -8,17 +8,17 @@ import (
 )
 
 // Use for the get all users from mongo db database.
-func UpdateUserEmailMongo(userEmail string, body bson.M) bool {
+func UpdateUserMongo(userEmail string, body bson.M) bool {
 
 	filter := bson.D{{"email", userEmail}}
-	client := getMongoDBGetInstance()
+	collection := getCollectionUsers()
 
 	// MongoDB güncelleme ifadesini oluşturun
 	update := bson.M{
 		"$set": body,
 	}
 
-	result, err := client.Database("deneme").Collection("Users").UpdateOne(context.TODO(), filter, update)
+	result, err := collection.UpdateOne(context.TODO(), filter, update)
 	if err != nil {
 		println(err)
 	}

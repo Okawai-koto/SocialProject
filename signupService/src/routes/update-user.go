@@ -18,7 +18,7 @@ func UpdateUserEmail(c *gin.Context) {
 		return
 	}
 	userEmail := c.Param("email")
-	result := mongo.UpdateUserEmailMongo(userEmail, requestBody)
+	result := mongo.UpdateUserMongo(userEmail, requestBody)
 	if result == false {
 		c.IndentedJSON(http.StatusOK, gin.H{"message": "it didn't work (uptade mail)"})
 		return

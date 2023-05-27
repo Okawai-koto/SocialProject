@@ -9,9 +9,9 @@ import (
 // Use for the get all users from mongo db database.
 func DeleteUserFromMongo(userEmail string) bool {
 	filter := bson.D{{"email", userEmail}}
-	client := getMongoDBGetInstance()
+	collection := getCollectionUsers()
 
-	result, err := client.Database("deneme").Collection("Users").DeleteOne(context.TODO(), filter)
+	result, err := collection.DeleteOne(context.TODO(), filter)
 	if err != nil {
 		println(err)
 	}

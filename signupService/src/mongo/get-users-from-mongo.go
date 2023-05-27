@@ -11,8 +11,8 @@ import (
 // Use for the get all users from mongo db database.
 func GetUsersFromMongo() []models.User {
 	var users = []models.User{}
-	client := getMongoDBGetInstance()
-	cur, err := client.Database("deneme").Collection("Users").Find(context.TODO(), bson.D{})
+	collection := getCollectionUsers()
+	cur, err := collection.Find(context.TODO(), bson.D{})
 	if err != nil {
 		log.Fatal(err)
 	}

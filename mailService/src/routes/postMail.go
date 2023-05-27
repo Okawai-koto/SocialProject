@@ -13,15 +13,15 @@ import (
 // getAlbums responds with the list of all albums as JSON.
 func PostMail(c *gin.Context) {
 
-	var NewUser models.User
-	if err := c.BindJSON(&NewUser); err != nil {
+	var UsersEmailData models.MailData
+	if err := c.BindJSON(&UsersEmailData); err != nil {
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, NewUser)
+	result := aws.SendEmail(UsersEmailData.Email, UsersEmailData.Verifycode)
 
-	code := verifycode()
-
-	aws.SendEmail(NewUser.Email, code)
-
+	if result == false {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message": "E mail couldnt send"})
+	}
+	c.IndentedJSON(http.StatusOK, UsersEmailData)
 }

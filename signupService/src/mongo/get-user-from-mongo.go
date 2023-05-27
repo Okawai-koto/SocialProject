@@ -10,9 +10,9 @@ import (
 // Use for the get all users from mongo db database.
 func GetUserFromMongo(userEmail string) models.User {
 	filter := bson.D{{"email", userEmail}}
-	client := getMongoDBGetInstance()
+	collection := getCollectionUsers()
 	var result models.User
-	err := client.Database("deneme").Collection("Users").FindOne(context.TODO(), filter).Decode(&result)
+	err := collection.FindOne(context.TODO(), filter).Decode(&result)
 	if err != nil {
 		println("çekme başarısız")
 	}
